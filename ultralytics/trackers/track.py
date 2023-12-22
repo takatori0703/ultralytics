@@ -52,10 +52,9 @@ def on_predict_postprocess_end(predictor: object, persist: bool = False) -> None
     path, im0s = predictor.batch[:2]
 
     for i in range(bs):
-        if not persist and predictor.vid_path[i] != str(predictor.save_dir / Path(path[i]).name):  # new video
-            predictor.trackers[i].reset()
 
-        det = predictor.results[i].boxes.cpu().numpy()
+        det = predictor.results[i].boxes.data.cpu().numpy()
+
         if len(det) == 0:
             continue
         tracks = predictor.trackers[i].update(det, im0s[i])
