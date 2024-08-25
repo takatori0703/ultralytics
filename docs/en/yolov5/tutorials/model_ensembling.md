@@ -1,12 +1,13 @@
 ---
 comments: true
-description: Learn how to ensemble YOLOv5 models for improved mAP and Recall! Clone the repo, install requirements, and start testing and inference.
-keywords: YOLOv5, object detection, ensemble learning, mAP, Recall
+description: Learn how to use YOLOv5 model ensembling during testing and inference to enhance mAP and Recall for more accurate predictions.
+keywords: YOLOv5, model ensembling, testing, inference, mAP, Recall, Ultralytics, object detection, PyTorch
 ---
 
 📚 This guide explains how to use YOLOv5 🚀 **model ensembling** during testing and inference for improved mAP and Recall.
 
 From [https://en.wikipedia.org/wiki/Ensemble_learning](https://en.wikipedia.org/wiki/Ensemble_learning):
+
 > Ensemble modeling is a process where multiple diverse models are created to predict an outcome, either by using many different modeling algorithms or using different training data sets. The ensemble model then aggregates the prediction of each base model and results in once final prediction for the unseen data. The motivation for using ensemble models is to reduce the generalization error of the prediction. As long as the base models are diverse and independent, the prediction error of the model decreases when the ensemble approach is used. The approach seeks the wisdom of crowds in making a prediction. Even though the ensemble model has multiple base models within the model, it acts and performs as a single model.
 
 ## Before You Start
