@@ -4,6 +4,7 @@ import glob
 import math
 import os
 import time
+from typing import Tuple
 from dataclasses import dataclass
 from pathlib import Path
 from threading import Thread
@@ -62,7 +63,8 @@ class LoadStreams:
          ```
     """
 
-    def __init__(self, sources="file.streams", vid_stride=1, buffer=False):
+    def __init__(self, sources="file.streams", vid_stride=1, buffer=False, cam_fps:int = 30,
+                  cam_resolution_hw:Tuple[int, int] = (480, 640)):
         """Initialize instance variables and check for consistent input stream shapes."""
         torch.backends.cudnn.benchmark = True  # faster for fixed-size inference
         self.buffer = buffer  # buffer input streams
@@ -92,6 +94,16 @@ class LoadStreams:
                     "'source=0' webcam not supported in Colab and Kaggle notebooks. "
                     "Try running 'source=0' in a local environment."
                 )
+            
+            if os.name == 'nt':
+                self.caps[i] = cv2.VideoCapture(s, cv2.CAP_MSMF)  # store video capture object
+            else:
+                self.caps[i] = cv2.VideoCapture(s)  # store video capture object
+            self.caps[i].set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
+            self.caps[i].set(cv2.CAP_PROP_FPS, cam_fps)
+            self.caps[i].set(cv2.CAP_PROP_FRAME_WIDTH, cam_resolution_hw[1])
+            self.caps[i].set(cv2.CAP_PROP_FRAME_HEIGHT, cam_resolution_hw[0])
+
             self.caps[i] = cv2.VideoCapture(s)  # store video capture object
             if not self.caps[i].isOpened():
                 raise ConnectionError(f"{st}Failed to open {s}")

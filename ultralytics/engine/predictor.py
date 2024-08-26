@@ -33,6 +33,7 @@ import platform
 import re
 import threading
 from pathlib import Path
+from typing import Tuple
 
 import cv2
 import numpy as np
@@ -200,6 +201,8 @@ class BasePredictor:
             batch=self.args.batch,
             vid_stride=self.args.vid_stride,
             buffer=self.args.stream_buffer,
+            cam_fps=self.args.cam_fps,
+            cam_resolution_hw=self.args.cam_res_hw,
         )
         self.source_type = self.dataset.source_type
         if not getattr(self, "stream", True) and (

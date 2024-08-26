@@ -3,6 +3,7 @@
 import os
 import random
 from pathlib import Path
+from typing import Tuple
 
 import numpy as np
 import torch
@@ -171,7 +172,8 @@ def check_source(source):
     return source, webcam, screenshot, from_img, in_memory, tensor
 
 
-def load_inference_source(source=None, batch=1, vid_stride=1, buffer=False):
+def load_inference_source(source=None, batch=1, vid_stride=1, buffer=False, cam_fps:int = 30,
+                  cam_resolution_hw:Tuple[int, int] = (480, 640)):
     """
     Loads an inference source for object detection and applies necessary transformations.
 
@@ -193,7 +195,8 @@ def load_inference_source(source=None, batch=1, vid_stride=1, buffer=False):
     elif in_memory:
         dataset = source
     elif stream:
-        dataset = LoadStreams(source, vid_stride=vid_stride, buffer=buffer)
+        dataset = LoadStreams(source, vid_stride=vid_stride, buffer=buffer, cam_fps=cam_fps,
+                              cam_resolution_hw=cam_resolution_hw)
     elif screenshot:
         dataset = LoadScreenshots(source)
     elif from_img:
