@@ -64,7 +64,7 @@ classes: # (int | list[int], optional) filter results by class, i.e. classes=0, 
 retina_masks: False # (bool) use high-resolution segmentation masks
 embed: # (list[int], optional) return feature vectors/embeddings from given layers
 cam_fps: 30 # (int, optional) camera framerate
-cam_resolution_hw: # (list[int], optional) camera resolution
+cam_res_hw: # (list[int], optional) camera resolution
 
 # Visualize settings ---------------------------------------------------------------------------------------------------
 show: False # (bool) show predicted images and videos if environment allows
