@@ -93,6 +93,8 @@ class BasePredictor:
         self.done_warmup = False
         if self.args.show:
             self.args.show = check_imshow(warn=True)
+        if self.args.cam_res_hw is None:
+            self.args.cam_res_hw = (480, 640)
 
         # Usable if setup is done
         self.model = None
